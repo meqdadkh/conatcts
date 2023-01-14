@@ -1,5 +1,9 @@
-%@ include file ="../webapp.WEB-INF.jsp.common/header.jspf" %>
-<%--<%@ include file ="../webapp.WEB-INF.jsp.common/navigation.jspf" %>--%>
+<html>
+<head>
+	<title>Contats Application</title>
+	<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 <div class="container">
 	<table class="table table-striped">
 		<caption>Your contacts are</caption>
@@ -13,11 +17,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${contacts}" var="Contact">
+			<c:forEach items="${contacts}" var="var1">
 			<tr>
-				<td>${Contact.firstName}</td>
-				<td>${Contact.middleName}</td>
-				<td>${Contact.lastName}</td>
+				<td>${var1.firstName}jj</td>
+				<td>${var1.middleName}</td>
+				<td>${var1.lastName}</td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -28,3 +32,5 @@
 </div>
 <%--
 <%@ include file ="../webapp.WEB-INF.jsp.common/footer.jspf" %>--%>
+</body>
+</html>

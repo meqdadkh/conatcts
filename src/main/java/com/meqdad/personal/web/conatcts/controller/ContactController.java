@@ -1,6 +1,7 @@
 package com.meqdad.personal.web.conatcts.controller;
 
 import com.meqdad.personal.web.conatcts.repository.ContactRepository;
+import com.meqdad.personal.web.conatcts.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ public class ContactController {
 
     @Autowired
     ContactRepository contactRepository;
+    @Autowired
+    ContactService contactService;
+
 
     @RequestMapping(value = "/show-contacts", method = RequestMethod.GET)
     public String showContacts(ModelMap model) {
-        model.put("contacts", contactRepository.findAll());
-        return "show-contacts";
+        return contactService.showContacts(model);
     }
 }
