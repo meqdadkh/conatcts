@@ -1,16 +1,18 @@
 package com.meqdad.personal.web.conatcts.controller;
 
+import com.meqdad.personal.web.conatcts.model.Contact;
 import com.meqdad.personal.web.conatcts.repository.ContactRepository;
 import com.meqdad.personal.web.conatcts.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class ContactController {
 
     @Autowired
@@ -19,8 +21,14 @@ public class ContactController {
     ContactService contactService;
 
 
-    @RequestMapping(value = "/show-contacts", method = RequestMethod.GET)
-    public String showContacts(ModelMap model) {
-        return contactService.showContacts(model);
+    @GetMapping(value = "/show-contacts-names-only")
+    public List<Contact> showContactsNamesOnly(ModelMap model) {
+        return contactService.fetchContactsNamesOnly();
+    }
+
+    @GetMapping(value = "/show-contacts-with-number")
+    //public List<Contact> showContacts(ModelMap model) {
+    public void showContacts(ModelMap model) {
+        //return contactService.fetchContactsWithNames();
     }
 }
