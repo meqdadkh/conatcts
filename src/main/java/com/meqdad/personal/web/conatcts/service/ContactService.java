@@ -11,7 +11,7 @@ public class ContactService {
     @Autowired
     ContactRepository contactRepository;
 
-    public String showContacts(ModelMap model) {
+    public String presentContacts(ModelMap model) {
         model.put("contacts", contactRepository.findAll());
         return "show-contacts";
     }
