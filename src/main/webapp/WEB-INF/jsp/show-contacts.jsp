@@ -13,13 +13,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="Contact" items="${contacts}">
-				<c:out value="${contacts}"/>
+			<c:forEach items="${contacts}" var="Contact">
 			<tr>
-
-				<td>${Contact}</td>
-				<td>${Contact}</td>
-				<td>${Contact}</td>
+				<td>${Contact.firstName}</td>
+				<td>${Contact.middleName}</td>
+				<td>${Contact.lastName}</td>
 			</tr>
 			</c:forEach>
 		</tbody>
