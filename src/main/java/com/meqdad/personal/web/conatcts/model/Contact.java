@@ -21,7 +21,7 @@ public class Contact {
     private String lastName;
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
-    private List<Entry> Entries = new ArrayList<>();
+    private List<Entry> entries = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "label_Contact",

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ContactController {
@@ -28,7 +29,7 @@ public class ContactController {
 
     @GetMapping(value = "/show-contacts-with-number")
     //public List<Contact> showContacts(ModelMap model) {
-    public void showContacts(ModelMap model) {
-        //return contactService.fetchContactsWithNames();
+    public List<Contact> showContacts(ModelMap model) {
+        return contactService.fetchContactsWithEntries();
     }
 }
