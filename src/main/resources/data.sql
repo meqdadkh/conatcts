@@ -1,3 +1,12 @@
+insert into LABEL
+values ('10001', '1', 'Family');
+
+insert into LABEL
+values ('10002', '2', 'Colleague');
+
+insert into LABEL
+values ('10003', '3', 'Classmate');
+
 insert into CONTACT
 values ('20001', 'Meqdad', 'Khamehyar', null);
 
@@ -25,5 +34,14 @@ values ('30004', 'Work', '02123456789', '20002');
 insert into ENTRY
 values ('30005', 'Mobile', '09919876543', '20003');
 
-/*insert into ENTRY
-values ('30006', 'HomeFax', '02155667788', '20004');*/
+insert into ENTRY
+values ('30006', 'HomeFax', '02155667788', '20004');
+
+insert into LABEL_CONTACT
+values (20001, 10002);
+
+insert into LABEL_CONTACT
+values (20001, 10003);
+
+insert into LABEL_CONTACT
+values (20003, 10002);

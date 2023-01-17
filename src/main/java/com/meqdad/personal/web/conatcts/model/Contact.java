@@ -3,13 +3,14 @@ package com.meqdad.personal.web.conatcts.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Contact {
 
     @Id
     @GeneratedValue
-    private Long contactId;
+    private Long Id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -20,51 +21,86 @@ public class Contact {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "contact_id")
     private List<Entry> entries = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL} )
     @JoinTable(name = "label_Contact",
             joinColumns = @JoinColumn(name = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id"))
     private List<Label> labels = new ArrayList<>();
 
-
-    public Contact() {
-        super();
+    public Long getId() {
+        return Id;
     }
 
-    public Contact(Long contactId, String firstName, String middleName, String lastName) {
-        this.contactId = contactId;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-    }
-
-    public Long getContactId() {
-        return contactId;
+    public void setId(Long Id) {
+        this.Id = Id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getMiddleName() {
         return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<Entry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<Entry> entries) {
+        this.entries = entries;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(Id, contact.Id) && Objects.equals(firstName, contact.firstName) && Objects.equals(middleName, contact.middleName) && Objects.equals(lastName, contact.lastName) && Objects.equals(entries, contact.entries) && Objects.equals(labels, contact.labels);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, firstName, middleName, lastName, entries, labels);
+    }
 
     @Override
     public String toString() {
         return "Contact{" +
-                "contactId=" + contactId +
+                "Id=" + Id +
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", entries=" + entries +
+                ", labels=" + labels +
                 '}';
     }
 }

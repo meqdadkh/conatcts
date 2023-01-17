@@ -3,13 +3,14 @@ package com.meqdad.personal.web.conatcts.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Label {
 
     @Id
     @GeneratedValue
-    private Long labelId;
+    private Long Id;
 
     @Column(nullable = false)
     private String name;
@@ -17,37 +18,66 @@ public class Label {
     @Column()
     private Colour colour = Colour.White;
 
-    @ManyToMany(mappedBy = "labels")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "label_id")
     private List<Contact> contatcs = new ArrayList<>();
 
     public Label() {
         super();
     }
 
-    public Label(Long id, String name, Colour colour) {
-        this.labelId = id;
-        this.name = name;
-        this.colour = colour;
+    public Long getId() {
+        return Id;
     }
 
-    public Long getLabelId() {
-        return labelId;
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Colour getColour() {
         return colour;
+    }
+
+    public void setColour(Colour colour) {
+        this.colour = colour;
+    }
+
+    public List<Contact> getContatcs() {
+        return contatcs;
+    }
+
+    public void setContatcs(List<Contact> contatcs) {
+        this.contatcs = contatcs;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Label label = (Label) o;
+        return Objects.equals(Id, label.Id) && Objects.equals(name, label.name) && colour == label.colour && Objects.equals(contatcs, label.contatcs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, name, colour, contatcs);
     }
 
     @Override
     public String toString() {
         return "Label{" +
-                "getLabelId=" + labelId +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
-                ", colour='" + colour + '\'' +
+                ", colour=" + colour +
+                ", contatcs=" + contatcs +
                 '}';
     }
 }
