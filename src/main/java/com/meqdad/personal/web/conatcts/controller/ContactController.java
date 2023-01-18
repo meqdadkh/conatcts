@@ -2,7 +2,9 @@ package com.meqdad.personal.web.conatcts.controller;
 
 import com.meqdad.personal.web.conatcts.model.Contact;
 import com.meqdad.personal.web.conatcts.service.ContactService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +24,11 @@ public class ContactController {
     public List<Contact> findContacts() {
         return contactService.find();
     }
+
+    @PostMapping
+    public String addContact(Contact contact, BindingResult result) {
+        return contactService.add(contact, result);
+    }
+
 
 }
