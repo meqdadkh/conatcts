@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -26,5 +27,19 @@ public class ContactService {
 
         contactRepository.save(contact);
         return "redirect:/";
+    }
+
+    public Optional<Contact> findById(Long id) {
+        return contactRepository.findById(id);
+    }
+
+    public String update(Long id, Contact contact) {
+        contact.setId(id);
+        contactRepository.save(contact);
+        return "redirect:/";
+    }
+
+    public void delete(Long id) {
+        contactRepository.deleteById(id);
     }
 }

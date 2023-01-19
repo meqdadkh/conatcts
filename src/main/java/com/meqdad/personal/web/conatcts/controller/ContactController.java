@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "contacts")
@@ -22,10 +23,23 @@ public class ContactController {
         return contactService.find();
     }
 
+    @GetMapping(path = "/{id}")
+    public Optional<Contact> findContactById(@PathVariable Long id) {
+        return contactService.findById(id);
+    }
+
     @PostMapping
     public String addContact(@RequestBody Contact contact, BindingResult result) {
         return contactService.add(contact, result);
     }
 
+    @PostMapping(path = "/{id}")
+    public String updateContact(@PathVariable Long id, @RequestBody Contact contact) {
+        return contactService.update(id, contact);
+    }
 
+    @DeleteMapping(path = "/{id}")
+    public void deleteContact(@PathVariable Long id) {
+        contactService.delete(id);
+    }
 }
