@@ -1,6 +1,11 @@
 package com.meqdad.personal.web.conatcts.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,12 +26,19 @@ public class Contact {
     @Column(name = "last_name")
     private String lastName;
 
+    @UpdateTimestamp
+    private Timestamp lastUpdatedDate;
+
+    @CreationTimestamp
+//    @Column(nullable = false)
+    private Timestamp CreatedDate;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     private List<Entry> entries = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL} )
-    @JoinTable(name = "label_Contact",
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "contact_label",
             joinColumns = @JoinColumn(name = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id"))
     private List<Label> labels = new ArrayList<>();
@@ -63,6 +75,22 @@ public class Contact {
         this.lastName = lastName;
     }
 
+    public Timestamp getLastUpdatedDate() {
+        return lastUpdatedDate;
+    }
+
+    public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public Timestamp getCreatedDate() {
+        return CreatedDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        CreatedDate = createdDate;
+    }
+
     public List<Entry> getEntries() {
         return entries;
     }
@@ -84,12 +112,12 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return Objects.equals(Id, contact.Id) && Objects.equals(firstName, contact.firstName) && Objects.equals(middleName, contact.middleName) && Objects.equals(lastName, contact.lastName) && Objects.equals(entries, contact.entries) && Objects.equals(labels, contact.labels);
+        return Objects.equals(Id, contact.Id) && Objects.equals(firstName, contact.firstName) && Objects.equals(middleName, contact.middleName) && Objects.equals(lastName, contact.lastName) && Objects.equals(lastUpdatedDate, contact.lastUpdatedDate) && Objects.equals(CreatedDate, contact.CreatedDate) && Objects.equals(entries, contact.entries) && Objects.equals(labels, contact.labels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, firstName, middleName, lastName, entries, labels);
+        return Objects.hash(Id, firstName, middleName, lastName, lastUpdatedDate, CreatedDate, entries, labels);
     }
 
     @Override
@@ -99,6 +127,8 @@ public class Contact {
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", lastUpdatedDate=" + lastUpdatedDate +
+                ", CreatedDate=" + CreatedDate +
                 ", entries=" + entries +
                 ", labels=" + labels +
                 '}';

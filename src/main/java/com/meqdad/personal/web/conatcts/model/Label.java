@@ -18,8 +18,7 @@ public class Label {
     @Column()
     private Colour colour = Colour.White;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "label_id")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "labels")
     private List<Contact> contatcs = new ArrayList<>();
 
     public Label() {

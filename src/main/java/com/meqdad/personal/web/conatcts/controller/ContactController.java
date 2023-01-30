@@ -42,4 +42,9 @@ public class ContactController {
     public void deleteContact(@PathVariable Long id) {
         contactService.delete(id);
     }
+
+    @GetMapping(path= "/contactsJpqlQueryUpdate")
+    public int contactsJpqlQueryUpdate() {
+        return contactService.contactsJpqlQueryUpdate();
+    }
 }

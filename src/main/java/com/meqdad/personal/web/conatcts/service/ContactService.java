@@ -42,4 +42,8 @@ public class ContactService {
     public void delete(Long id) {
         contactRepository.deleteById(id);
     }
+
+    public int contactsJpqlQueryUpdate() {
+        return contactRepository.contactsJpqlQueryUpdate();
+    }
 }
