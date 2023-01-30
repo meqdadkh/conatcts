@@ -7,16 +7,16 @@ values ('10002', '2', 'Colleague');
 insert into LABEL
 values ('10003', '3', 'Classmate');
 
-insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_UPDATED_DATE)
+insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_MODIFIED_DATE)
 values ('20001', 'Meqdad', null, 'Khamehyar', current_timestamp, current_timestamp);
 
-insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_UPDATED_DATE)
+insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_MODIFIED_DATE)
 values ('20002', 'Mahdi', null, 'Khamehyar', current_timestamp, current_timestamp);
 
-insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_UPDATED_DATE)
+insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_MODIFIED_DATE)
 values ('20003', 'Amin', null, 'Khamehyar', current_timestamp, current_timestamp);
 
-insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_UPDATED_DATE)
+insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_MODIFIED_DATE)
 values ('20004', 'Hossein', 'Ali', 'Hosseini', current_timestamp, current_timestamp);
 
 insert into ENTRY
