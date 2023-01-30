@@ -17,4 +17,16 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     @Transactional
     @Query("update Contact c set c.firstName = 'Ali' where c.Id = 20001")
     int contactsJpqlQueryUpdate();
+
+    @Query("select c from Contact c where c.labels is empty ")
+    List<Contact> contactsWithoutLabelsJpql();
+
+    @Query("select c from Contact c where size(c.labels) >= 2")
+    List<Contact> contactsWithAtleast2LabelsJpql();
+
+    @Query("select c from Contact c order by size(c.labels)")
+    List<Contact> contactsOrderBySizeOfLabelsJpql();
+
+    @Query("select c from Contact c where c.entries.content like '%09%'")
+    List<Contact> contactsWithCertainPatternInEntryContentJpql();
 }

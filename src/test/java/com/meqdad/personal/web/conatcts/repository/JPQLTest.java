@@ -44,4 +44,32 @@ public class JPQLTest {
     public void jpql_update_basic() {
         contactRepository.contactsJpqlQueryUpdate();
     }
+
+    @Test
+    @Transactional
+    public void contactsWithoutLabels() {
+        List<Contact> contacts = contactRepository.contactsWithoutLabelsJpql();
+        logger.info("Contacts without labels are -> " + contacts);
+    }
+
+    @Test
+    @Transactional
+    public void contactsWithatleast2Labels() {
+        List<Contact> contacts = contactRepository.contactsWithAtleast2LabelsJpql();
+        logger.info("Contacts with atleast 2 labels are -> " + contacts);
+    }
+
+    @Test
+    @Transactional
+    public void contactsOrderBySizeOfLabels() {
+        List<Contact> contacts = contactRepository.contactsOrderBySizeOfLabelsJpql();
+        logger.info("Contacts ordered by size of labels are -> " + contacts);
+    }
+
+    @Test
+    @Transactional
+    public void contactsWithCertainPatternInEntryContent() {
+        List<Contact> contacts = contactRepository.contactsWithCertainPatternInEntryContentJpql();
+        logger.info("Contacts with certain pattern in entry content are -> " + contacts);
+    }
 }

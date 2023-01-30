@@ -76,7 +76,6 @@ public class Label {
                 "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", colour=" + colour +
-                ", contatcs=" + contatcs +
                 '}';
     }
 }

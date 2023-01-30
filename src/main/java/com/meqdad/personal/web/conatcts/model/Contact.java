@@ -1,17 +1,12 @@
 package com.meqdad.personal.web.conatcts.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Contact extends BaseEntity{
+public class Contact extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -26,7 +21,7 @@ public class Contact extends BaseEntity{
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id")
     private List<Entry> entries = new ArrayList<>();
 

@@ -26,7 +26,7 @@ insert into ENTRY
 values ('30002', 'Home', '02112345678', '20001');
 
 insert into ENTRY
-values ('30003', 'Mobile', '09334567890', '20002');
+    values ('30003', 'Mobile', '09334567890', '20002');
 
 insert into ENTRY
 values ('30004', 'Work', '02123456789', '20002');
