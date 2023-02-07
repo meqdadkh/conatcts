@@ -34,8 +34,8 @@ values ('30004', 'Work', '02123456789', '20002');
 insert into ENTRY
 values ('30005', 'Mobile', '09919876543', '20003');
 
-insert into ENTRY
-values ('30006', 'HomeFax', '02155667788', '20004');
+/*insert into ENTRY
+values ('30006', 'HomeFax', '02155667788', '20004');*/
 
 insert into CONTACT_LABEL
 values (20001, 10002);
