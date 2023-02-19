@@ -1,9 +1,10 @@
 package com.meqdad.personal.web.conatcts.service;
 
 import com.meqdad.personal.web.conatcts.model.Contact;
+import com.meqdad.personal.web.conatcts.model.Entry;
 import com.meqdad.personal.web.conatcts.repository.ContactRepository;
+import com.meqdad.personal.web.conatcts.repository.EntryRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,25 +13,34 @@ import java.util.Optional;
 public class ContactService {
 
     private final ContactRepository contactRepository;
+    private final EntryRepository entryRepository;
 
-    public ContactService(ContactRepository contactRepository) {
+    public ContactService(ContactRepository contactRepository, EntryRepository entryRepository) {
         this.contactRepository = contactRepository;
+        this.entryRepository = entryRepository;
     }
 
     public List<Contact> find() {
         return contactRepository.findAll();
     }
 
-    public String add(Contact contact, BindingResult result) {
-        if (result.hasErrors())
-            return "contact";
+    public Contact add(Contact contact) {
 
-        contactRepository.save(contact);
-        return "redirect:/";
+        return contactRepository.save(contact);
     }
 
     public Optional<Contact> findById(Long id) {
         return contactRepository.findById(id);
+    }
+
+    public List<Entry> findContactEntries(Long id) {
+        Optional<Contact> contact = findById(id);
+        if (contact.isPresent()) {
+            List<Entry> entries = contact.get().getEntries();
+            if (!entries.isEmpty())
+                return entries;
+        }
+        return null;
     }
 
     public String update(Long id, Contact contact) {
@@ -45,5 +55,28 @@ public class ContactService {
 
     public int contactsJpqlQueryUpdate() {
         return contactRepository.contactsJpqlQueryUpdate();
+    }
+
+    public Entry addEntry(Long contactId, Entry entry) {
+        Entry savedEntry = entryRepository.save(entry);
+        List<Entry> entries = null;
+        entries.add(entry);
+        Contact contact = findById(contactId).get();
+        contact.setEntries(entries);
+        update(contactId,contact);
+        return savedEntry;
+
+
+    }
+
+    public Entry findSpecialContactEntry(Long id, Long entryId) {
+        Optional<Contact> contact = findById(id);
+        if (contact.isPresent()) {
+            List<Entry> entries = contact.get().getEntries();
+            for (Entry entry: entries)
+                if(entry.getId().equals(entryId))
+                    return entry;
+        }
+        return null;
     }
 }

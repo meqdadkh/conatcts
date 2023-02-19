@@ -8,16 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ConatctsApplication.class)
@@ -66,10 +60,19 @@ public class JPQLTest {
         logger.info("Contacts ordered by size of labels are -> " + contacts);
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void contactsWithCertainPatternInEntryContent() {
         List<Contact> contacts = contactRepository.contactsWithCertainPatternInEntryContentJpql();
         logger.info("Contacts with certain pattern in entry content are -> " + contacts);
+    }*/
+
+    @Test
+    @Transactional
+    public void join() {
+        List<Object[]> resultList = contactRepository.joinJpql();
+        logger.info("join size Contacts with entities are -> " + resultList.size());
+        for (Object[] result : resultList)
+            logger.info("join result Contacts with entities are -> " + result[0], "---", result[1]);
     }
 }

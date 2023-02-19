@@ -15,10 +15,10 @@ public class Label {
     @Column(nullable = false)
     private String name;
 
-    @Column()
+    @Enumerated(EnumType.STRING)
     private Colour colour = Colour.White;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "labels")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "labels", fetch = FetchType.EAGER)
     private List<Contact> contatcs = new ArrayList<>();
 
     public Label() {

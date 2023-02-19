@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 
+    List<Contact> findByFirstName(String firstName);
+
     @Query("select c from Contact c")
     List<Contact> contactsJpqlQuerySelect();
 
@@ -27,6 +29,9 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     @Query("select c from Contact c order by size(c.labels)")
     List<Contact> contactsOrderBySizeOfLabelsJpql();
 
-    @Query("select c from Contact c where c.entries.content like '%09%'")
-    List<Contact> contactsWithCertainPatternInEntryContentJpql();
+    /*@Query("select c from Contact c where c.entries.content like '%09%'")
+    List<Contact> contactsWithCertainPatternInEntryContentJpql();*/
+
+    @Query("select c, e from Contact c join c.entries e")
+    List<Object[]> joinJpql();
 }

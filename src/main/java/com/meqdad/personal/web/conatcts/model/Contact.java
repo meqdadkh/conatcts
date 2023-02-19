@@ -1,5 +1,9 @@
 package com.meqdad.personal.web.conatcts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +25,20 @@ public class Contact extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Embedded
+    private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "contact_id")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Entry> entries = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "contact_label",
             joinColumns = @JoinColumn(name = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id"))
+    @Fetch(value = FetchMode.SELECT)
+    @JsonIgnore
     private List<Label> labels = new ArrayList<>();
 
     public Long getId() {
@@ -61,6 +71,14 @@ public class Contact extends BaseEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public List<Entry> getEntries() {

@@ -1,11 +1,11 @@
 insert into LABEL
-values ('10001', '1', 'Family');
+values ('10001', 'White', 'Family');
 
 insert into LABEL
-values ('10002', '2', 'Colleague');
+values ('10002', 'Red', 'Colleague');
 
 insert into LABEL
-values ('10003', '3', 'Classmate');
+values ('10003', 'Blue', 'Classmate');
 
 insert into CONTACT (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, CREATED_DATE, LAST_MODIFIED_DATE)
 values ('20001', 'Meqdad', null, 'Khamehyar', current_timestamp, current_timestamp);
