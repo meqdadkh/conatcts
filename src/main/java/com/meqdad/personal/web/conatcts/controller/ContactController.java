@@ -7,6 +7,8 @@ import com.meqdad.personal.web.conatcts.service.ContactService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+//import org.springframework.hateoas.*;
+//import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -33,6 +35,11 @@ public class ContactController {
         Optional<Contact> contact = contactService.findById(id);
         if (!contact.isPresent())
             throw new ContactNotFoundException("id - " + id);
+
+        /*Resource<Contact> resource = new Resource<Contact>(contact);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass)).findContacts());
+        resource.add(linkTo.withRel("all-contacts"));*/
+
         return contact;
     }
 
