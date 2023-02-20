@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +54,7 @@ public class ContactController {
 
 
     @PostMapping
-    public ResponseEntity<Object> addContact(@RequestBody Contact contact) {
+    public ResponseEntity<Object> addContact(@Valid @RequestBody Contact contact) {
         Contact savedContact = contactService.add(contact);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedContact.getId()).toUri();
         return ResponseEntity.created(location).build();
@@ -65,15 +66,19 @@ public class ContactController {
     }
 
     @PostMapping("/{id}/entries")
-    public ResponseEntity<Object> addEntry(@PathVariable Long contactId, @RequestBody Entry entry) {
-        Entry savesEntry = contactService.addEntry(contactId, entry);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/entries").buildAndExpand(savesEntry.getId()).toUri();
+    public ResponseEntity<Object> addEntry(@PathVariable Long id, @RequestBody Entry entry) {
+        Entry savedEntry = contactService.addEntry(id, entry);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEntry.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
     @DeleteMapping("/{id}")
     public void deleteContact(@PathVariable Long id) {
-        contactService.delete(id);
+        try {
+            contactService.delete(id);
+        } catch (Exception e) {
+            throw new ContactNotFoundException("id - " + id);
+        }
     }
 
     @GetMapping("/contactsJpqlQueryUpdate")

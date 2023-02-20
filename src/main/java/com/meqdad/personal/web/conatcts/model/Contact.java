@@ -5,6 +5,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,12 +18,14 @@ public class Contact extends BaseEntity {
     @GeneratedValue
     private Long Id;
 
+    @Size (min = 2, message = "Name should hava atleast 2 charachters")
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "middle_name")
     private String middleName;
 
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
 

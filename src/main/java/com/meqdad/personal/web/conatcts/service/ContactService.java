@@ -6,6 +6,7 @@ import com.meqdad.personal.web.conatcts.repository.ContactRepository;
 import com.meqdad.personal.web.conatcts.repository.EntryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,13 +58,13 @@ public class ContactService {
         return contactRepository.contactsJpqlQueryUpdate();
     }
 
-    public Entry addEntry(Long contactId, Entry entry) {
+    public Entry addEntry(Long id, Entry entry) {
         Entry savedEntry = entryRepository.save(entry);
-        List<Entry> entries = null;
+        Contact contact = findById(id).get();
+        List<Entry> entries = contact.getEntries();
         entries.add(entry);
-        Contact contact = findById(contactId).get();
         contact.setEntries(entries);
-        update(contactId,contact);
+        update(id,contact);
         return savedEntry;
 
 
